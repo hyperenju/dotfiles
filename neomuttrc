@@ -1,0 +1,108 @@
+# Secrets (decrypt on load)
+# source "gpg -dq ~/.config/neomutt/passwds.gpg |"
+
+set wait_key = no
+
+# Identity
+set realname = ""
+set from     = ""
+
+# Receiving (IMAP)
+set imap_user = ""
+
+set folder    = "imaps://example.com:993/"
+set spoolfile = "+INBOX"
+
+# Connection / performance
+set imap_keepalive = 300
+set imap_idle = yes
+set imap_check_subscribed = no
+
+# Cache (mkdir -p ~/.cache/neomutt/{headers,bodies})
+set header_cache     = "~/.cache/neomutt/headers"
+set message_cachedir = "~/.cache/neomutt/bodies"
+
+# Polling
+set mail_check        = 60
+set imap_poll_timeout = 15
+
+# Sending (SMTP: builtin)
+# drafts
+set postpone  = yes
+set postponed = "~/mail-drafts/postponed/"
+
+# Use submission (587) with STARTTLS
+set smtp_url = "smtp://user@example.com@example.com:587/"
+
+set smtp_authenticators = "login"
+set ssl_starttls  = yes
+set ssl_force_tls = yes
+
+# Disable sendmail wrapper / gmail leftovers
+unset sendmail
+
+# Editor / charset
+set editor           = "nvim"
+set charset          = "utf-8"
+set assumed_charset  = "utf-8"
+set send_charset     = "utf-8:us-ascii"
+
+# UI
+set sort = threads
+set sort_aux = reverse-last-date-received
+set date_format  = "%m/%d %H:%M"
+set index_format = "%4C %Z %{%b %d %H:%M} %-15.15L (%?l?%4l&%4c?) %s"
+
+# Read-mostly safety
+set delete = no
+set move   = no
+set beep   = no
+set mark_old = no
+
+# Incremental load/write (optional)
+set read_inc  = 100
+set write_inc = 100
+
+# Mailing list behavior (kernel friendly)
+set reply_to = yes
+set honor_followup_to = yes
+set reply_self = no
+
+set include = yes
+set edit_headers = yes
+
+# Prefer group-reply by default
+bind index,pager r   group-reply
+bind index,pager \Cr reply
+macro index,pager R "<group-reply><edit-headers>" "Reply all + edit headers"
+
+# Prefer plain text, avoid format=flowed surprises
+set content_type = "text/plain"
+set text_flowed = no
+
+# Diff/Patch coloring
+color body brightred     default "^-.*"
+color body brightgreen   default "^\\+.*"
+color body brightyellow  default "^@@.*"
+color body brightblue    default "^diff --git.*"
+color body brightcyan    default "^index.*"
+color body brightmagenta default "^From:.*"
+color body brightwhite   default "^Subject:.*"
+
+# Patch view/edit in neovim
+macro pager \cv "|nvim -R -c 'set ft=diff' -<enter>" "view patch in neovim"
+
+# Keybindings (optional)
+# source "~/.config/neomutt/vim-keys.rc"
+
+# Colorscheme
+# source "/usr/share/neomutt/colorschemes/zenburn.neomuttrc"
+
+# Fix: Enter should open the message (index -> pager)
+bind index \r display-message
+bind index \n display-message
+
+set pager_index_lines = 10
+
+color index brightred default "~r <1d"
+color index yellow default "~N"
