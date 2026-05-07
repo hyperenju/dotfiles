@@ -1,0 +1,38 @@
+[user]
+        email =
+        name =
+
+[sendemail]
+        smtpEncryption =
+        smtpauth =
+        smtpServer =
+        smtpServerPort =
+        smtpUser =
+        from =
+        transferEncoding = 8bit
+
+[core]
+    editor = nvim
+    pager = delta
+    abbrev = 12
+
+[alias]
+    f = log --pretty=fixes
+
+[delta]
+    hyperlinks = true
+
+[commit]
+    verbose = true
+
+[format]
+    signoff = true
+
+[credential]
+	helper = store
+
+[init]
+	defaultBranch = main
+
+[pretty]
+    fixes = Fixes: %h (\"%s\")
